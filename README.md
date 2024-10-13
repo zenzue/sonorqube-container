@@ -31,6 +31,7 @@ docker run --rm \
   -Dsonar.sources=. \
   -Dsonar.host.url=http://host \
   -Dsonar.login=key
+  -Dsonar.java.binaries=/usr/src/target/classes
 ```
 
 This command includes:
