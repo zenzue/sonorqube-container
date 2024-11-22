@@ -32,6 +32,17 @@
 </table>
 
 <script>
+    function getColorBySeverity(severity) {
+        switch(severity) {
+            case 'BLOCKER': return '#ff0000';
+            case 'CRITICAL': return '#ff4500';
+            case 'MAJOR': return '#ff8c00';
+            case 'MINOR': return '#ffd700';
+            case 'INFO': return '#1e90ff';
+            default: return '#ffffff';
+        }
+    }
+
     fetch('all_project_issues.json')
     .then(response => response.json())
     .then(data => {
@@ -39,7 +50,11 @@
         data.forEach(issue => {
             const row = table.insertRow();
             row.insertCell().textContent = issue.key;
-            row.insertCell().textContent = issue.severity;
+            
+            const severityCell = row.insertCell();
+            severityCell.textContent = issue.severity;
+            severityCell.style.backgroundColor = getColorBySeverity(issue.severity);
+
             row.insertCell().textContent = issue.component;
             row.insertCell().textContent = issue.line;
             row.insertCell().textContent = issue.message;
